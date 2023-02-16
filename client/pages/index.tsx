@@ -1,13 +1,10 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import DashboardLayout from "../components/DashboardLayout";
-import { schoolName, SERVER_URL } from "./_app";
-
-import indexBackground from "../public/images/index-bg.jpg";
+import { orgName, SERVER_URL } from "./_app";
+import Hero from "../components/index/Hero";
 
 const REQ_URL = `${SERVER_URL}/user`;
 
@@ -47,7 +44,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`Dashboard | ${schoolName}`}</title>
+        <title>{`Dashboard | ${orgName}`}</title>
         <link
           rel="shortcut icon"
           href="/images/favicon.ico"
@@ -55,45 +52,11 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <section
-        className="h-screen bg-black/50 bg-cover bg-center bg-no-repeat bg-blend-multiply"
-        style={{ backgroundImage: `url(${indexBackground.src}` }}
-      >
-        <header className="h-32">
-          <div className="sticky top-0 flex items-center justify-between gap-20 bg-yellow-500/80 px-24 py-4 font-poppins">
-            <h1 className="select-none border-4 border-double border-orange-700 px-2 py-1 text-2xl font-bold uppercase">
-              {schoolName}
-            </h1>
+      <Hero />
 
-            <nav className="flex flex-grow flex-row-reverse gap-12 text-sm font-semibold tracking-widest">
-              <Link href="/about">Events</Link>
-              <Link href="/about">News</Link>
-              <Link href="/about">Contact</Link>
-              <Link href="/about">About Us</Link>
-            </nav>
-
-            <button className="flex flex-col gap-1">
-              <span className={hamburgerMenuBar}></span>
-              <span className={hamburgerMenuBar}></span>
-              <span className={hamburgerMenuBar}></span>
-            </button>
-          </div>
-        </header>
-
-        <div>
-          <h1 className="text-4xl font-bold uppercase text-yellow-400">
-            {/* <span>Experience</span>
-      <br />
-      <span>the taste</span> */}
-            Hero
-          </h1>
-        </div>
-      </section>
+      <section className="h-screen bg-black p-4 text-white"></section>
     </>
   );
 };
 
 export default Home;
-
-// ------------------------------ Styling ------------------------------
-const hamburgerMenuBar = "block h-1 w-8 bg-black";

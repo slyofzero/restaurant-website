@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
-      roboto: ["Roboto", "sans-serif"],
+      oswald: ["Oswald", "sans-serif"],
     },
   },
   plugins: [],

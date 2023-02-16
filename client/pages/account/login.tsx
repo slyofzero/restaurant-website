@@ -7,7 +7,7 @@ import AuthFormLayout, {
   submitButtonStyles,
 } from "../../components/auth/AuthFormLayout";
 import axios, { AxiosError, isAxiosError } from "axios";
-import { schoolName, SERVER_URL } from "../_app";
+import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
 
 type Props = {};
@@ -70,7 +70,7 @@ const LoginForm = (props: Props) => {
   return (
     <AuthFormLayout>
       <Head>
-        <title>Log in | {schoolName}</title>
+        <title>Log in | {orgName}</title>
       </Head>
 
       <section

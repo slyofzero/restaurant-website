@@ -7,7 +7,7 @@ import AuthFormLayout, {
   isValidEmail,
 } from "../../components/auth/AuthFormLayout";
 import axios, { AxiosError, isAxiosError } from "axios";
-import { schoolName, SERVER_URL } from "../_app";
+import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
 
 type Props = {};
@@ -85,7 +85,7 @@ const RegisterForm = (props: Props) => {
   return (
     <AuthFormLayout>
       <Head>
-        <title>Create Account | {schoolName}</title>
+        <title>Create Account | {orgName}</title>
       </Head>
 
       <section
