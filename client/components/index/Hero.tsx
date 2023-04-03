@@ -6,10 +6,16 @@ import { SERVER_URL, orgName } from "../../pages/_app";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import useLoggedUser from "../../context/loggedUser/useLoggedUser";
 
+// ------------------------------ SSR ------------------------------
+// export const getServerSideProps = async () => {};
+
+// ------------------------------ Component ------------------------------
 const Hero = () => {
   const router = useRouter();
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const { setLoggedUser } = useLoggedUser();
 
   // Logout user
   const logoutUser = async () => {
@@ -19,6 +25,7 @@ const Hero = () => {
       const req = await axios.delete(REQ_URL, { withCredentials: true });
 
       if (req.data) {
+        setLoggedUser({});
         router.push("/account/login");
       }
     } catch (error) {
@@ -64,7 +71,7 @@ const Hero = () => {
             }`}
           >
             <li>
-              <Link href={"/user"} className={hamburgerMenuItem}>
+              <Link href={"/account"} className={hamburgerMenuItem}>
                 User
               </Link>
             </li>

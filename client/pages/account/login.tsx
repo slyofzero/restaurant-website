@@ -9,6 +9,7 @@ import AuthFormLayout, {
 import axios, { AxiosError, isAxiosError } from "axios";
 import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
+import useLoggedUser from "../../context/loggedUser/useLoggedUser";
 
 // ------------------------------ Types and Interfaces ------------------------------
 interface FormDataI {
@@ -16,11 +17,10 @@ interface FormDataI {
   password: string;
 }
 
-const REQ_URL = `${SERVER_URL}/auth/login`;
-
 // ------------------------------ Component ------------------------------
 const LoginForm = () => {
   const router = useRouter();
+  const { setLoggedUser } = useLoggedUser();
 
   // Storing the data that is entered into the form in a state
   const [formData, setFormData] = useState<FormDataI>({
@@ -45,10 +45,11 @@ const LoginForm = () => {
       if (!password) return setAlert("User password is required");
 
       // --------------------------- Sending axios request ---------------------------
-      await axios.post(REQ_URL, formData, {
+      await axios.post(`${SERVER_URL}/auth/login`, formData, {
         withCredentials: true,
       });
 
+      // Redirection to the homepage on a successful login
       router.push("/");
     } catch (err) {
       if (isAxiosError(err)) {
