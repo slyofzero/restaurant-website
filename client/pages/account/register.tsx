@@ -10,8 +10,7 @@ import axios, { AxiosError, isAxiosError } from "axios";
 import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
 
-type Props = {};
-
+// ------------------------------ Types and Interfaces ------------------------------
 interface FormDataI {
   name: string;
   email: string;
@@ -21,10 +20,11 @@ interface FormDataI {
 
 const REQ_URL = `${SERVER_URL}/auth/register`;
 
-const RegisterForm = (props: Props) => {
+// ------------------------------ Component ------------------------------
+const RegisterForm = () => {
   const router = useRouter();
 
-  // Form data
+  // Storing the data that is entered into the form in a state
   const [formData, setFormData] = useState<FormDataI>({
     name: "",
     email: "",
@@ -32,7 +32,7 @@ const RegisterForm = (props: Props) => {
     confirmPassword: "",
   });
 
-  //   SetAlert
+  //  Storing any alert messages that happen during form submission as a state
   const [alert, setAlert] = useState<string>();
 
   // Handle form submission
@@ -93,6 +93,8 @@ const RegisterForm = (props: Props) => {
       >
         <h1 className="text-3xl font-bold">Create new account</h1>
 
+        <p>{alert}</p>
+
         <form
           className="mx-auto flex flex-col gap-4"
           autoComplete="off"
@@ -103,7 +105,7 @@ const RegisterForm = (props: Props) => {
             name="name"
             id="name"
             placeholder="Name"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
@@ -112,7 +114,7 @@ const RegisterForm = (props: Props) => {
             name="email"
             id="email"
             placeholder="Email ID"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
@@ -121,7 +123,7 @@ const RegisterForm = (props: Props) => {
             name="password"
             id="password"
             placeholder="Password"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
@@ -130,12 +132,15 @@ const RegisterForm = (props: Props) => {
             name="confirmPassword"
             id="confirmPassword"
             placeholder="Confirm Password"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
-          <button type="submit" className={submitButtonStyles}>
-            Login
+          <button
+            type="submit"
+            className={`${submitButtonStyles} bg-yellow-500 text-black`}
+          >
+            Register
           </button>
         </form>
 
@@ -154,3 +159,6 @@ const RegisterForm = (props: Props) => {
 };
 
 export default RegisterForm;
+
+// ------------------------------ Styling ------------------------------
+const newInputStyles = `${inputStyles} focus:bg-yellow-500 text-black focus:placeholder:text-black/50`;

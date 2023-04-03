@@ -8,4 +8,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
 
 export const SERVER_URL = "http://localhost:3507";
-export const orgName = "Oggie";
+export const orgName = "Doggie";

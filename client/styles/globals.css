@@ -12,4 +12,14 @@
   body {
     @apply font-poppins;
   }
+
+  html {
+    @apply selection:bg-red-800 selection:text-slate-400;
+
+    ::-webkit-scrollbar {
+      display: 0px;
+    }
+
+    scrollbar-width: none;
+  }
 }

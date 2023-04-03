@@ -8,13 +8,13 @@ type Props = {
 
 type FormPathType = "register" | "login" | null;
 
-const AuthFormLayout: NextPage<Props> = ({ children }) => {
+const AuthFormLayout: NextPage<Props> = ({ children }: Props) => {
   const path = useRouter().pathname.split("/").slice(-1)[0] as FormPathType;
 
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main className={formStyles({ path })}>
       {children}
-      <section className={heroStyles({ path })}></section>
+      <section className={authBannerStyles({ path })}></section>
     </main>
   );
 };
@@ -31,16 +31,24 @@ export const isValidEmail = (email: string) => {
 
 // <------------------------------ Styling ------------------------------>
 export const inputStyles =
-  "w-72 h-8 focus:bg-slate-900 focus:text-white transition-all duration-500 border-2 border-solid border-black outline-none rounded-md px-2 placeholder:text-sm";
+  "w-72 h-8 transition-all duration-500 border-2 border-solid border-black outline-none rounded-md px-2 placeholder:text-sm";
 
-export const submitButtonStyles =
-  "bg-slate-900 p-2 text-white rounded-md hover:bg-slate-700 transition-all duration-500";
+export const submitButtonStyles = "p-2 rounded-md transition-all duration-500";
 
-const heroStyles = cva("bg-gradient-to-r min-h-screen flex-grow", {
+const authBannerStyles = cva("bg-gradient-to-r min-h-screen flex-grow", {
   variants: {
     path: {
-      login: "from-purple-400 to-fuchsia-700",
-      register: "from-red-400 to-orange-700",
+      login: "bg-black",
+      register: "bg-yellow-500",
+    },
+  },
+});
+
+const formStyles = cva("flex min-h-screen items-center justify-center", {
+  variants: {
+    path: {
+      login: "bg-yellow-500 text-black",
+      register: "bg-black text-yellow-500",
     },
   },
 });

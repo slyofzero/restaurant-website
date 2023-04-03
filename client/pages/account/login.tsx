@@ -10,8 +10,7 @@ import axios, { AxiosError, isAxiosError } from "axios";
 import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
 
-type Props = {};
-
+// ------------------------------ Types and Interfaces ------------------------------
 interface FormDataI {
   email: string;
   password: string;
@@ -19,16 +18,17 @@ interface FormDataI {
 
 const REQ_URL = `${SERVER_URL}/auth/login`;
 
-const LoginForm = (props: Props) => {
+// ------------------------------ Component ------------------------------
+const LoginForm = () => {
   const router = useRouter();
 
-  // Form data
+  // Storing the data that is entered into the form in a state
   const [formData, setFormData] = useState<FormDataI>({
     email: "",
     password: "",
   });
 
-  //   SetAlert
+  //  Storing any alert messages that happen during form submission as a state
   const [alert, setAlert] = useState<string>();
 
   // Handle form submission
@@ -45,7 +45,10 @@ const LoginForm = (props: Props) => {
       if (!password) return setAlert("User password is required");
 
       // --------------------------- Sending axios request ---------------------------
-      await axios.post(REQ_URL, formData, { withCredentials: true });
+      await axios.post(REQ_URL, formData, {
+        withCredentials: true,
+      });
+
       router.push("/");
     } catch (err) {
       if (isAxiosError(err)) {
@@ -78,6 +81,8 @@ const LoginForm = (props: Props) => {
       >
         <h1 className="text-3xl font-bold">Log into your account</h1>
 
+        <p>{alert}</p>
+
         <form
           className="mx-auto flex flex-col gap-4"
           autoComplete="off"
@@ -88,7 +93,7 @@ const LoginForm = (props: Props) => {
             name="email"
             id="email"
             placeholder="Email ID"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
@@ -97,11 +102,14 @@ const LoginForm = (props: Props) => {
             name="password"
             id="password"
             placeholder="Password"
-            className={inputStyles}
+            className={newInputStyles}
             onChange={handleChange}
           />
 
-          <button type="submit" className={submitButtonStyles}>
+          <button
+            type="submit"
+            className={`${submitButtonStyles} bg-black text-yellow-500`}
+          >
             Login
           </button>
         </form>
@@ -121,3 +129,6 @@ const LoginForm = (props: Props) => {
 };
 
 export default LoginForm;
+
+// ------------------------------ Styling ------------------------------
+const newInputStyles = `${inputStyles} border-black focus:bg-black focus:text-yellow-500`;
