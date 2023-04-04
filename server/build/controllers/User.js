@@ -60,9 +60,12 @@ export const createUser = (req, res) => __awaiter(void 0, void 0, void 0, functi
 export const loginUser = (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Check if email ID is available
+        console.log(email, password);
         const user = yield User.findOne({ email });
         if (!user) {
-            return done(null, false, { message: "Email ID is already in use" });
+            return done(null, false, {
+                message: `No user with email ${email} found.`,
+            });
         }
         // Check the password
         if (!(yield bcrypt.compare(password, user.password))) {

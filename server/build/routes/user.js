@@ -3,6 +3,7 @@ import { getUser } from "../controllers/User.js";
 export const userRouter = Router();
 // --------------------------- GET ---------------------------
 userRouter.get("/", getUser);
+// --------------------------- DELETE ---------------------------
 userRouter.delete("/logout", (req, res) => {
     req.logOut((err) => {
         if (err)

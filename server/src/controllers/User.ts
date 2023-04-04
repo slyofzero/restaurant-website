@@ -59,9 +59,12 @@ export const createUser: ControllerFuncType = async (req, res) => {
 export const loginUser: VerifyFunction = async (email, password, done) => {
   try {
     // Check if email ID is available
+    console.log(email, password);
     const user = await User.findOne({ email });
     if (!user) {
-      return done(null, false, { message: "Email ID is already in use" });
+      return done(null, false, {
+        message: `No user with email ${email} found.`,
+      });
     }
 
     // Check the password

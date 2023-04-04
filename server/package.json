@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_ENV=production node ./build/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./build/server.js"
+    "start:dev": "cross-env NODE_ENV=development nodemon ./build/server.js",
+    "dev": "concurrently \"tsc --watch\" \"yarn start:dev\""
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -32,6 +33,7 @@
     "@types/node": "^18.13.0",
     "@types/passport": "^1.0.11",
     "@types/passport-local": "^1.0.35",
+    "concurrently": "^8.0.1",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.20"
   }

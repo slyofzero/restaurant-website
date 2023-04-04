@@ -9,7 +9,7 @@ import AuthFormLayout, {
 import axios, { AxiosError, isAxiosError } from "axios";
 import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
-import useLoggedUser from "../../context/loggedUser/useLoggedUser";
+import useAuthAlert from "../../context/AuthAlert/useAuthAlert";
 
 // ------------------------------ Types and Interfaces ------------------------------
 interface FormDataI {
@@ -20,8 +20,6 @@ interface FormDataI {
 // ------------------------------ Component ------------------------------
 const LoginForm = () => {
   const router = useRouter();
-  const { setLoggedUser } = useLoggedUser();
-
   // Storing the data that is entered into the form in a state
   const [formData, setFormData] = useState<FormDataI>({
     email: "",
@@ -29,7 +27,7 @@ const LoginForm = () => {
   });
 
   //  Storing any alert messages that happen during form submission as a state
-  const [alert, setAlert] = useState<string>();
+  const { alert, setAlert } = useAuthAlert();
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {

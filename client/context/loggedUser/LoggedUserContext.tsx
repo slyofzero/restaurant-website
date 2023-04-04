@@ -22,7 +22,7 @@ export const LoggedUserContext = createContext<ILoggedUserContext | null>(null);
 export const LoggedUserContextProvider = ({ children }: ProviderProps) => {
   const [loggedUser, setLoggedUser] = useState<UserI>({});
 
-  const value = { loggedUser, setLoggedUser };
+  const value: ILoggedUserContext = { loggedUser, setLoggedUser };
 
   return (
     <LoggedUserContext.Provider value={value}>

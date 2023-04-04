@@ -1,45 +1,32 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import { orgName, SERVER_URL } from "./_app";
 import Hero from "../components/index/Hero";
+import { useEffect } from "react";
+import useLoggedUser from "../context/LoggedUser/useLoggedUser";
 
-const REQ_URL = `${SERVER_URL}/user`;
+// ------------------------------ Types and interfaces ------------------------------
 
-interface UserDataI {
-  id?: string;
-  name?: string;
-  email?: string;
-}
-
+// ------------------------------ Component ------------------------------
 const Home: NextPage = () => {
-  const router = useRouter();
-  const [userData, setUserData] = useState<UserDataI>({});
+  const { setLoggedUser } = useLoggedUser();
 
-  // Get data related to the logged in user
   useEffect(() => {
-    const getUserData = async () => {
+    const getUser = async () => {
       try {
-        const response = await axios.get(REQ_URL, { withCredentials: true });
-        setUserData(response.data.message);
-      } catch (err) {
-        console.log(err);
+        const REQ_URL = `${SERVER_URL}/user`;
+        const res = await axios.get(REQ_URL, { withCredentials: true });
+        const userData = res.data.message;
+
+        setLoggedUser(userData);
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    getUserData();
+    getUser();
   }, []);
-
-  const logoutUser = async () => {
-    try {
-      await axios.delete(`${REQ_URL}/logout`, { withCredentials: true });
-      router.push("/account/login");
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <>

@@ -9,6 +9,7 @@ import AuthFormLayout, {
 import axios, { AxiosError, isAxiosError } from "axios";
 import { orgName, SERVER_URL } from "../_app";
 import { useRouter } from "next/router";
+import useAuthAlert from "../../context/AuthAlert/useAuthAlert";
 
 // ------------------------------ Types and Interfaces ------------------------------
 interface FormDataI {
@@ -33,7 +34,7 @@ const RegisterForm = () => {
   });
 
   //  Storing any alert messages that happen during form submission as a state
-  const [alert, setAlert] = useState<string>();
+  const { alert, setAlert } = useAuthAlert();
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
